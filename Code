@@ -1,0 +1,19 @@
+           using System.Net;
+           using System.IO;
+           
+           
+            string myStr = String.Format("https://jsonplaceholder.typicode.com/users");
+            WebRequest requestObjGet = WebRequest.Create(myStr);
+            //requestObjGet.Credentials = new NetworkCredential("UserName", "Password");
+            requestObjGet.Method = "GET";
+            HttpWebResponse responseObjGet = null;
+            responseObjGet = (HttpWebResponse)requestObjGet.GetResponse();
+
+            string strResult = null;
+
+            using (Stream stream = responseObjGet.GetResponseStream())
+            {
+                StreamReader sr = new StreamReader(stream);
+                strResult = sr.ReadToEnd();
+                sr.Close();
+            }
